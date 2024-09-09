@@ -22,7 +22,7 @@ class Model:
         ).to(self.device)
         self.llm = Ollama(model="llama3.1")
         self.prompt_template = ChatPromptTemplate.from_template(
-            "You are a helpful and creative assistant who responds based on the image more precisely. Here is the description of that image: '{image_description}'. {question} Please respond concisely, not more than 3 lines."
+            "You are a helpful assistant who responds based on the image more precisely. Here is the description of that image: '{image_description}'. {question} Please respond concisely, not more than 3 lines."
         )
         self.executor = concurrent.futures.ThreadPoolExecutor()
 
