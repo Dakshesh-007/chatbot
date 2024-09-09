@@ -24,7 +24,8 @@ class Model:
         self.prompt_template = ChatPromptTemplate.from_template(
             "You are a helpful assistant. Here is an image description: '{image_description}'. {question}"
         )
-        self.executor = concurrent.futures.ThreadPoolExecutor()
+        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
+        self.timeout = 15
 
     def input_img(self, img_data):
         inputs = self.img_processor(
