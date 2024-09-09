@@ -22,16 +22,15 @@ class Model:
         ).to(self.device)
         self.llm = Ollama(model="llama3.1")
         self.prompt_template = ChatPromptTemplate.from_template(
-            "You are a helpful assistant. Here is an image description: '{image_description}'. {question}"
+            "You are a helpful assistant. Here is an image description: '{image_description}'. {question} Please respond concisely, not more than 3 lines."
         )
-        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=4)
-        self.timeout = 15
+        self.executor = concurrent.futures.ThreadPoolExecutor()
 
     def input_img(self, img_data):
         inputs = self.img_processor(
             img_data, return_tensors="pt", clean_up_tokenization_spaces=True
         ).to(self.device)
-        caption_ids = self.img_model.generate(**inputs, max_new_tokens=50)
+        caption_ids = self.img_model.generate(**inputs, max_new_tokens=20)
         image_description = self.img_processor.decode(
             caption_ids[0], skip_special_tokens=True
         )
