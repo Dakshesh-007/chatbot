@@ -52,7 +52,6 @@ class Model:
 
 
 if __name__ == "__main__":
-    import tkinter as tk
     from PIL import Image
     import requests
     from io import BytesIO
@@ -68,7 +67,7 @@ if __name__ == "__main__":
     description = model.input_img(img)
 
     while True:
-        user_inp = input("Enter: ")
+        user_inp = input("Type \\exit to close\nEnter: ")
         if user_inp == "\\exit":
             print("Bye!")
             break
